@@ -65,5 +65,8 @@ ax.set_xlabel('$x$', fontsize=20)
 ax.set_ylabel('$y$', fontsize=20)
 ax.set_zlabel('$z$', fontsize=20)
 
+# Устонавливаем наименование заголовка.
+plt.gcf().canvas.set_window_title('Поляризации электромагнитных волн')
+
 # Показывать объекты графика и фигуры.
 plt.show()
