@@ -3,9 +3,9 @@
 
 """
 	Программа "Polarization".
-	Предназначена для вывода графика Поляризации электромагнитных волн по выбору параметров (шкалы) пользователем.
+	Предназначена для постройки графика Поляризации электромагнитных волн по выбору параметров (шкалы) пользователем.
 	Программа позваляет определить поляризацию электромагнитной волны в для выражения: E_x0=1, E_y0=1, φ=π/2.
-	Программа соответствует документу PEP 8 (Python Enhanced Proposal, общепринятый стиль написания кода на языке Python).
+	Результатом работы данной программы является график поляризации электромагнитных волн, управляемый пользователем.
 """
 
 
@@ -13,9 +13,9 @@ import math as mt  # импорт библиотеки math
 import matplotlib.pyplot as plt  # импорт библиотеки matplotlib
 from matplotlib.widgets import Slider  # импорт библиотеки matplotlib.widgets
 
-vkt = 60  # кол-во отображаемых векторов
-y_min = 0  # начало y (ограничение построения)
-y_max = 4  # конец y (ограничение построения)
+vkt = 60  # кол-во отображаемых векторов.
+y_min = 0  # начало y (ограничение построения).
+y_max = 4  # конец y (ограничение построения).
 
 # Инициализация списков для координат x, y, z; а так же списков координат векторов Ex, Ey, Ez.
 x, y, z, e_x, e_y, e_z = (list() for _ in range(6))
@@ -23,7 +23,7 @@ x, y, z, e_x, e_y, e_z = (list() for _ in range(6))
 # Инициализируем и задаем Ex0, Ey0.
 e_x0, e_z0 = 1, 1
 
-# Инициализируем и задаем начальный момент времени
+# Инициализируем и задаем начальный момент времени.
 time = 2
 
 # Вызов из библиотеки math метод π; назначаем начальный угол.
@@ -85,16 +85,16 @@ def ShowAx(l):
 # Функция перерасчёта векторов при заданных значениях.
 def refresh(val):
 	# Передача времени.
-	tm = spolt.val
+	tm = s_pol_time.val
 
 	# Передача угла π.
-	Pi = spolphi.val
+	Pi = s_pol_pi.val
 
 	# Передача e_x0.
-	Ex0 = spolEx.val
+	Ex0 = s_pol_ex.val
 
 	# передача e_y0.
-	Ez0 = spolEy.val
+	Ez0 = s_pol_ey.val
 
 	# Функция для очистки списка векторов.
 	AllClear()
@@ -181,28 +181,28 @@ def sett():
 
 
 # Установка расположений слайдеров.
-axpolt = plt.axes([0.1, 0.03, 0.8, 0.04], facecolor='#B5B5B5')
-axpolphi = plt.axes([0.1, 0.07, 0.8, 0.04], facecolor='#EEAEEE')
-axpolEx = plt.axes([0.1, 0.11, 0.8, 0.04], facecolor='#CD919E')
-axpolEy = plt.axes([0.1, 0.15, 0.8, 0.04], facecolor='#CDBA96')
+ax_pol_time = plt.axes([0.1, 0.03, 0.8, 0.04], facecolor='#B5B5B5')
+ax_pol_pi = plt.axes([0.1, 0.07, 0.8, 0.04], facecolor='#EEAEEE')
+ax_pol_ex = plt.axes([0.1, 0.11, 0.8, 0.04], facecolor='#CD919E')
+ax_pol_ey = plt.axes([0.1, 0.15, 0.8, 0.04], facecolor='#CDBA96')
 
 # Управление слайдерами.
-spolEy = (Slider(axpolEy, r'$E_yo=$', 0, 1, valinit=e_z0, valfmt='%1.2f', color='#66CDAA'))
-spolEx = Slider(axpolEx, r'$E_xo=$', 0, 1, valinit=e_x0, valfmt='%1.2f', color='#7FFFD4')
-spolphi = Slider(axpolphi, 'φ=', -mt.pi, mt.pi, valinit=pi, valfmt='%1.2f', color='#20B2AA')
-spolt = Slider(axpolt, 'time=', 0, 4, valinit=time, valfmt='%1.2f', color='#3CB371')
+s_pol_ey = (Slider(ax_pol_ey, r'$E_yo=$', 0, 1, valinit=e_z0, valfmt='%1.2f', color='#66CDAA'))
+s_pol_ex = Slider(ax_pol_ex, r'$E_xo=$', 0, 1, valinit=e_x0, valfmt='%1.2f', color='#7FFFD4')
+s_pol_pi = Slider(ax_pol_pi, 'φ=', -mt.pi, mt.pi, valinit=pi, valfmt='%1.2f', color='#20B2AA')
+s_pol_time = Slider(ax_pol_time, 'time=', 0, 4, valinit=time, valfmt='%1.2f', color='#3CB371')
 
 # Настраиваем фришт данным графы.
-spolEy.label.set_size(15)
-spolEx.label.set_size(15)
-spolphi.label.set_size(15)
-spolt.label.set_size(15)
+s_pol_ey.label.set_size(15)
+s_pol_ex.label.set_size(15)
+s_pol_pi.label.set_size(15)
+s_pol_time.label.set_size(15)
 
 # Вызов слайдеров.
-spolt.on_changed(refresh)
-spolphi.on_changed(refresh)
-spolEx.on_changed(refresh)
-spolEy.on_changed(refresh)
+s_pol_time.on_changed(refresh)
+s_pol_pi.on_changed(refresh)
+s_pol_ex.on_changed(refresh)
+s_pol_ey.on_changed(refresh)
 
 # Вызов фун-ии для настройка облака и легенды.
 sett()
