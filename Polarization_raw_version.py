@@ -52,7 +52,7 @@ ax.view_init(10, 55)
 # Отображение всех векторов на графике.
 for i in range(vkt):
     # Основаная оработа графиков с параметрами.
-    ax.quiver(x[i], y[i], z[i], e_x[i], e_y[i], e_z[i], color='#32CD32')
+    ax.quiver(x[i], y[i], z[i], e_x[i], e_y[i], e_z[i], color='#32CD32', linewidth=1.0)
 
 # задали рабочую область по х, y, z
 ax.set_xlim(-1, 1)
@@ -65,8 +65,18 @@ ax.set_xlabel('$x$', fontsize=20)
 ax.set_ylabel('$y$', fontsize=20)
 ax.set_zlabel('$z$', fontsize=20)
 
+
+def sett():
+    # Создание и установка легенды.
+    lgnd = ax.legend(['Вектор Поляризации.'], loc='upper center', shadow=False)
+    lgnd.get_frame().set_facecolor('#ffb19a')
+
+    # Устонавливаем наименование заголовка.
+    plt.gcf().canvas.set_window_title('Поляризации электромагнитных волн')
+
+
 # Устонавливаем наименование заголовка.
-plt.gcf().canvas.set_window_title('Поляризации электромагнитных волн')
+sett()
 
 # Показывать объекты графика и фигуры.
 plt.show()
