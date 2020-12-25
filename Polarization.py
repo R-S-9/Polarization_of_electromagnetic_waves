@@ -13,9 +13,9 @@ import math as mt  # импорт библиотеки math
 import matplotlib.pyplot as plt  # импорт библиотеки matplotlib
 from matplotlib.widgets import Slider  # импорт библиотеки matplotlib.widgets
 
-vkt = 60  # кол-во отображаемых векторов.
+vkt = 30  # кол-во отображаемых векторов.
 y_min = 0  # начало y (ограничение построения).
-y_max = 4  # конец y (ограничение построения).
+y_max = 2  # конец y (ограничение построения).
 
 # Инициализация списков для координат x, y, z; а так же списков координат векторов Ex, Ey, Ez.
 x, y, z, e_x, e_y, e_z = (list() for _ in range(6))
@@ -61,7 +61,7 @@ def AllClear():
 # Функция для отрисовки векторов.
 def ShowAx(l):
 	# Метод plot3D для "окантовка" векторов.
-	ax.plot3D(e_x, y, e_z, 'b')
+	ax.plot3D(e_x, y, e_z, 'b', linestyle='--')
 
 	# Метод set_xlim, set_ylim, set_zlim используется для установки диапазонов осей чтобы обрезать или расширить
 	# представление до определенных пределов.
@@ -76,7 +76,7 @@ def ShowAx(l):
 	ax.set_zlabel('$z$', fontsize=20)
 
 	# Создаем наименование нашему графику.
-	s = 'Поляризации электромагнитных волн при time = ' + str("%.2f" % l)
+	s = 'Поляризация электромагнитных волн при time = ' + str("%.2f" % l)
 
 	# Добавлеяем надпись в графическое окно.
 	ax.set_title(s, fontsize=20, color='#E066FF')
@@ -123,6 +123,7 @@ def refresh(val):
 			color='#32CD32',
 			# Жирность линий в объекте.
 			linewidth=1.0,
+			arrow_length_ratio=0.08,
 		)
 
 	# Функция для отрисовки векторов.
@@ -131,7 +132,7 @@ def refresh(val):
 	sett()
 
 	# Создание и установка легенды.
-	lgnd = ax.legend(['Оконтовка.', 'Вектор Поляризации.'], loc='upper center', shadow=False)
+	lgnd = ax.legend(['Окантовка.', 'Вектор Поляризация.'], loc='upper center', shadow=False)
 	lgnd.get_frame().set_facecolor('#ffb19a')
 
 
@@ -148,7 +149,7 @@ for i in range(vkt):
 
 # Отображение всех векторов на начальном графике.
 for i in range(vkt):
-	# Основаная оработа графиков с параметрами.
+	# Основаная работа графиков с параметрами.
 	ax.quiver(
 		x[i],
 		y[i],
@@ -159,7 +160,8 @@ for i in range(vkt):
 		# Цвет линий в объекте.
 		color='#32CD32',
 		# Жирность линий в объекте.
-		linewidth=1.0,
+		linewidth=0.6,
+		arrow_length_ratio=0.08,
 	)
 
 # Функция отрисовки векторов.
@@ -172,11 +174,11 @@ fig.subplots_adjust(left=0.0, right=1.0, top=0.9, bottom=0.25)
 # Настройка облака и легенды.
 def sett():
 	# Создание и установка легенды.
-	lgnd = ax.legend(['Оконтовка.', 'Вектор Поляризации.'], loc='upper center', shadow=False)
+	lgnd = ax.legend(['Окантовка.', 'Вектор Поляризация.'], loc='upper center', shadow=False)
 	lgnd.get_frame().set_facecolor('#ffb19a')
 
 	# Устонавливаем наименование заголовка.
-	plt.gcf().canvas.set_window_title('Поляризации электромагнитных волн')
+	plt.gcf().canvas.set_window_title('Поляризация электромагнитных волн')
 
 
 # Установка расположений слайдеров.
